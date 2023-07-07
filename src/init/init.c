@@ -6,13 +6,11 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:02:45 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/06/29 16:09:18 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:08:47 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
-
-t_data	g_data;
 
 /**
  * @brief Check if the file is in the right format: "file.rt"
@@ -22,9 +20,12 @@ t_data	g_data;
  */
 int	valid_file(char *file)
 {
-	while (*file != '.' && *file)
-		file++;
-	if (ft_strcmp(file, "rt"))
+	int	i;
+
+	i = 0;
+	while (file[i])
+		i++;
+	if (file[i - 3] == '.' && file[i - 2] == 'r' && file[i - 1] == 't')
 		return (1);
 	return (0);
 }
@@ -46,24 +47,38 @@ void	end_file(char *buffer)
 }
 
 /**
- * @brief Check every line of the file and call init functions for each element for the scene
+ * @brief Check every line of the file and call init functions 
+ * for each element for the scene
  * 
  * @param buffer 
  */
-void	line_info(char *buffer)
+int	line_info(char *buffer)
 {
 	char	**line;
 
 	end_file(buffer);
 	line = ft_split(buffer, ' ');
 	if (!line)
-		return ;
+		return (0);
 	if (ft_strcmp(line[0], "C") == 0)
-		init_camera(line);
+	{
+		if (!init_camera(line))
+		{
+			free_matrix(line);
+			return (0);
+		}
+	}
 	if (ft_strcmp(line[0], "sp") == 0)
-		init_sphere(line);
-	if (ft_strcmp(line[0], "pl") == 0)
-		init_plane(line);
+	{
+		if (!add_sphere(line))
+		{
+			free_matrix(line);
+			free_all(1);
+			return (0);
+		}
+	}
+	free_matrix(line);
+	return (1);
 }
 
 /**
@@ -71,21 +86,33 @@ void	line_info(char *buffer)
  * 
  * @param argv 
  */
-void	parse_file(char **argv)
+int	parse_file(char **argv)
 {
 	int		fd;
 	char	*buffer;
 
 	fd = open(argv[1], O_RDONLY);
-	if (!valid_file(argv[1]) || fd == -1)
+	if (valid_file(argv[1]) == 0 || fd == -1)
+	{
 		handle_error("Invalid file name");
+		close(fd);
+		return (0);
+	}
 	buffer = get_next_line(fd);
 	while (buffer)
 	{
-		line_info(buffer);
+		if (!line_info(buffer))
+		{
+			free(buffer);
+			close(fd);
+			return (0);
+		}
+		free(buffer);
 		buffer = get_next_line(fd);
 	}
+	free(buffer);
 	close(fd);
+	return (1);
 }
 
 /**
@@ -95,7 +122,8 @@ void	parse_file(char **argv)
  */
 void	init_data(char **argv)
 {
-	parse_file(argv);
+	if (!parse_file(argv))
+		exit(errno);
 	init_scene();
-	(void)argv;
+	draw();
 }

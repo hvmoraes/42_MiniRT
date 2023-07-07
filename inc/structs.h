@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:47:28 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/06/29 16:48:40 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/07/04 11:31:31 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ typedef struct s_color
 	int	g;
 	int	b;
 }	t_color;
+
+typedef struct s_sphere
+{
+	t_coor3	coor;
+	double	radius;
+}	t_sphere;
+
+typedef struct s_object
+{
+	int							type;
+	void						*object;
+	t_color						color;
+	struct s_object				*next;
+}	t_object;
 
 typedef struct s_camera
 {
@@ -63,8 +77,9 @@ typedef struct t_mlx
 typedef struct s_data
 {
 	t_mlx				mlx;
-	t_camera		camera;
-	t_viewport	viewport;
+	t_camera			camera;
+	t_viewport			viewport;
+	t_object			*objects;
 }	t_data;
 
 #endif

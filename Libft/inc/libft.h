@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:44:54 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/06/29 16:22:20 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/06/30 10:14:33 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
+int				ft_iswhite(char c);
 
 int				ft_toupper(int c);
 int				ft_tolower(int c);

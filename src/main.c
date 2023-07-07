@@ -6,23 +6,26 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:58:48 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/06/28 10:48:32 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:44:52 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
 
+t_data	g_data;
+
 int	close_window(void)
 {
-	printf("Window closed\n");
+	end();
 	exit(0);
 }
 
 int	key_press(int keycode)
 {
-	if (keycode == 53)
+	printf("Key pressed: %i\n", keycode);
+	if (keycode == 65307)
 	{
-		printf("Window closed\n");
+		end();
 		exit(0);
 	}
 	return (1);
