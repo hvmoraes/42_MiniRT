@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 08:00:28 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/04 14:49:11 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/07/19 10:49:42 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,22 @@ t_coor3	subtract(t_coor3 u, t_coor3 v)
 	w.y = u.y - v.y;
 	w.z = u.z - v.z;
 	return (w);
+}
+
+/**
+ * @brief Normalize vector
+ * 
+ * @param vector 
+ * @return t_coor3 
+ */
+t_coor3	normalize(t_coor3 vector)
+{
+	double	length;
+
+	length = sqrt(vector.x * vector.x + vector.y
+			* vector.y + vector.z * vector.z);
+	vector.x /= length;
+	vector.y /= length;
+	vector.z /= length;
+	return (vector);
 }

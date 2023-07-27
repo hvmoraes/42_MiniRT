@@ -6,7 +6,7 @@
 #    By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 14:28:49 by hcorrea-          #+#    #+#              #
-#    Updated: 2023/06/30 10:05:37 by hcorrea-         ###   ########.fr        #
+#    Updated: 2023/07/07 11:43:47 by hcorrea-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ SRC     =	$(shell find $(SRC_DIR) -name '*.c')
 OBJ     =	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC			=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -I./inc -fsanitize=address -g
-LDFLAGS	=	-L./mlx -lmlx -framework OpenGL -framework AppKit
+CFLAGS	=	-Wall -Wextra -Werror -I./inc -g -fsanitize=address
+LDFLAGS	=	-L./mlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 
 RM				=	rm -rf
 MKDIR			=	mkdir -p
@@ -43,7 +43,7 @@ all:			$(NAME)
 					@sleep 0.5
 					@clear
 					@echo "$(YELLOW)Checking Norminette...$(END)"
-					@norminette $(SRC_DIR) $(LIBFT_DIR) $(INC) > norminette_output.txt; \
+					@norminette $(SRC_DIR) $(LIBFT_DIR) $(INC_DIR) > norminette_output.txt; \
 					RESULT=$$?; \
 					if [ $$RESULT -eq 0 ]; then \
 						echo "$(GREEN)Norminette check passed!$(END)"; \
@@ -86,7 +86,7 @@ $(LIBFT_FILE):
 
 clean:
 					@$(RM) $(OBJ_DIR)
-					@$(MAKE) mlx clean > /dev/null 2>&1
+					@rm -rf mlx/obj mlx/test/main.o mlx/test/mlx-test > /dev/null 2>&1
 					@$(MAKE) $(LIBFT_DIR) clean
 					@clear
 					@echo "$(RED)All objects deleted!$(END)"

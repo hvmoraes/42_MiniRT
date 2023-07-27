@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:54:39 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/04 10:59:26 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/07/19 10:13:37 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int	check_coords(char *coords, t_coor3 *coor_final)
 	coor_final->y = ft_atod(coords_check[1]);
 	coor_final->z = ft_atod(coords_check[2]);
 	free_matrix(coords_check);
-	return (coor_final->x >= 0 && coor_final->y >= 0
-		&& coor_final->z >= 0);
+	return (1);
 }
 
 int	check_normal(char *normal, t_coor3 *normal_final)

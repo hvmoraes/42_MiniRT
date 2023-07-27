@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:46:11 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/07 12:06:05 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:18:05 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,12 @@ int	check_color(char *color, t_color *color_final)
 	if (color_final->b < 0)
 		color_final->b = 0;
 	return (1);
+}
+
+void	pixel_put(t_mlx *mlx, int x, int y, int color)
+{
+	char	*dest;
+
+	dest = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
+	*(unsigned int *)dest = color;
 }

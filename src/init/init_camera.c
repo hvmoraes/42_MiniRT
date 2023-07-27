@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:53:04 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/07 14:45:03 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:18:51 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	canvas_viewport(int x, int y, t_coor3 *point)
 		+ (((double)x / WIDTH) * (g_data.viewport.width
 				/ vec_size(u))) * u.z + (((double)y / HEIGHT)
 			* (g_data.viewport.height / vec_size(v))) * v.z;
-	printf("%f\n%f\n%f\n", point->x, point->y, point->z);
 }
 
 /**
@@ -46,11 +45,13 @@ void	canvas_viewport(int x, int y, t_coor3 *point)
  */
 void	set_viewport(void)
 {
+	double	aspect_ratio;
+
 	g_data.viewport.distance = 1;
+	aspect_ratio = (double)WIDTH / (double)HEIGHT;
 	g_data.viewport.width = 2 * g_data.viewport.distance
-		* tan(to_rad(g_data.camera.fov));
-	g_data.viewport.height = g_data.viewport.width
-		* HEIGHT / WIDTH;
+		* tan(to_rad(g_data.camera.fov / 2));
+	g_data.viewport.height = g_data.viewport.width / aspect_ratio;
 }
 
 /**
@@ -64,10 +65,9 @@ int	init_camera(char **line)
 		return (parse_error("Camera's usage: C "
 				"[coords: x,y,z] [normal: x,y,z] fov"));
 	if (!check_coords(line[1], &g_data.camera.coor))
-		return (parse_error("Camera's coordinates "
-				"have to be in format [x,y,z]"));
+		return (0);
 	if (!check_normal(line[2], &g_data.camera.normal))
-		return (parse_error("Camera's coordinates have to be in format "
+		return (parse_error("Camera's normal coordinates have to be in format "
 				"[(x range: -1,1),(y range: -1,1),(z range: -1,1)]"));
 	g_data.camera.fov = ft_atod(line[3]);
 	if (g_data.camera.fov < 0 || g_data.camera.fov > 180)

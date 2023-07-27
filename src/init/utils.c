@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 10:21:51 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/04 08:53:06 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:20:00 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	set_vectors(t_coor3 *u, t_coor3 *v)
 {
 	t_coor3	w;
 
-	w.x = 1;
-	w.y = 0;
+	w.y = 1;
+	w.x = 0;
 	w.z = 0;
 	cross_prod(&w, &g_data.camera.normal, u);
-	if (is_zero(g_data.camera.normal.x) && is_zero(g_data.camera.normal.y)
-		&& is_zero(g_data.camera.normal.z))
+	if (is_zero(g_data.camera.normal.x) && is_zero(g_data.camera.normal.z)
+		&& g_data.camera.normal.y)
 	{
 		u->x = 1;
 		u->y = 0;
