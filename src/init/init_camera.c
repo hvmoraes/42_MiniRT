@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:53:04 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/19 14:18:51 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:54:53 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ void	canvas_viewport(int x, int y, t_coor3 *point)
 	t_coor3	v;
 
 	set_vectors(&u, &v);
-	point->x = g_data.camera.coor.x + g_data.camera.normal.x
-		+ (((double)x / WIDTH) * (g_data.viewport.width
-				/ vec_size(u))) * u.x + (((double)y / HEIGHT)
-			* (g_data.viewport.height / vec_size(v))) * v.x;
-	point->y = g_data.camera.coor.y + g_data.camera.normal.y
-		+ (((double)x / WIDTH) * (g_data.viewport.width
-				/ vec_size(u))) * u.y + (((double)y / HEIGHT)
-			* (g_data.viewport.height / vec_size(v))) * v.y;
-	point->z = g_data.camera.coor.z + g_data.camera.normal.z
-		+ (((double)x / WIDTH) * (g_data.viewport.width
-				/ vec_size(u))) * u.z + (((double)y / HEIGHT)
-			* (g_data.viewport.height / vec_size(v))) * v.z;
+	point->x = g_data.camera.coor.x + g_data.camera.normal.x + \
+	(((double)x / WIDTH) * (g_data.viewport.width / \
+	vec_size(u))) * u.x + (((double)y / HEIGHT) \
+	* (g_data.viewport.height / vec_size(v))) * v.x;
+	point->y = g_data.camera.coor.y + g_data.camera.normal.y + \
+	(((double)x / WIDTH) * (g_data.viewport.width / \
+	vec_size(u))) * u.y + (((double)y / HEIGHT) \
+	* (g_data.viewport.height / vec_size(v))) * v.y;
+	point->z = g_data.camera.coor.z + g_data.camera.normal.z + \
+	(((double)x / WIDTH) * (g_data.viewport.width / \
+	vec_size(u))) * u.z + (((double)y / HEIGHT) \
+	* (g_data.viewport.height / vec_size(v))) * v.z;
 }
 
 /**
@@ -48,8 +48,8 @@ void	set_viewport(void)
 	double	aspect_ratio;
 
 	g_data.viewport.distance = 1;
-	aspect_ratio = (double)WIDTH / (double)HEIGHT;
-	g_data.viewport.width = 2 * g_data.viewport.distance
+	aspect_ratio = (double)HEIGHT / (double)WIDTH;
+	g_data.viewport.width = 2 * g_data.viewport.distance 
 		* tan(to_rad(g_data.camera.fov / 2));
 	g_data.viewport.height = g_data.viewport.width / aspect_ratio;
 }

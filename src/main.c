@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:58:48 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/07 12:44:52 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:32:43 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	key_press(int keycode)
 
 int	main(int argc, char **argv)
 {
-	(void)argv;
 	if (argc == 2)
 	{
 		init_data(argv);

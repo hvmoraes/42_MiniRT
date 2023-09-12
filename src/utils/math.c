@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:50:10 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/19 10:42:37 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/09/06 11:30:03 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ double	quadratic(double a, double b, double c)
 	double	result2;
 
 	if (is_zero(pow(b, 2) - 4 * a * c))
-		return (0.0);
+		return (0);
 	else if (pow(b, 2) - 4 * a * c < 0)
 		return (-1);
 	result1 = ((-b + sqrt(pow(b, 2) - 4.0 * a * c)) / (2.0 * a));
@@ -54,9 +54,5 @@ double	quadratic(double a, double b, double c)
 		return (result2);
 	if (is_zero(result2))
 		return (result1);
-	if (result1 == result2)
-		return (result1);
-	if (is_zero(result1) && is_zero(result2))
-		return (0.0);
 	return (min(result1, result2));
 }
