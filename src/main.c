@@ -16,7 +16,7 @@ t_data	g_data;
 
 int	close_window(void)
 {
-	end();
+	//end();
 	exit(0);
 }
 
@@ -25,7 +25,7 @@ int	key_press(int keycode)
 	printf("Key pressed: %i\n", keycode);
 	if (keycode == 65307)
 	{
-		end();
+		//end();
 		exit(0);
 	}
 	return (1);

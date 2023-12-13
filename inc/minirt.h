@@ -58,8 +58,6 @@ void	add_object(t_object *object);
 
 /*    objects/sphere.c    */
 
-double	intersect_sphere(t_coor3 camera_origin, t_coor3 viewport_point,
-			t_sphere sphere);
 int		add_sphere(char **line);
 
 /*    end/error.c    */
@@ -69,9 +67,6 @@ void	handle_error(char *error);
 /*    end/free.c    */
 
 void	free_matrix(char **matrix);
-void	free_all(int flag);
-void	free_objects(void);
-void	end(void);
 
 /*    utils/coords.c    */
 

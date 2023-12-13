@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 08:36:29 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/09/04 11:35:40 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/12/13 11:08:23 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ int	add_sphere(char **line)
 	if (!object)
 	{
 		free_matrix(line);
-		handle_error("Dynamic allocation failed");
+		//handle_error("Dynamic allocation failed");
 	}
 	sphere = (t_sphere *)ft_calloc(1, sizeof(t_sphere));
 	if (!sphere)
 	{
 		free_matrix(line);
-		handle_error("Dynamic allocation failed");
+		//handle_error("Dynamic allocation failed");
 	}
 	object->object = sphere;
 	add_object(object);
