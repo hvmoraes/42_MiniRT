@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:46:11 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/12/13 11:06:54 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/12/19 10:29:57 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ int	check_color(char *color, t_color *color_final)
 	char	**color_check;
 
 	color_check = ft_split(color, ',');
-	if (line_fields(color_check) != 3)
+	if (line_fields(color_check) != 3 || !is_number(color_check[0])
+		|| !is_number(color_check[1]) || !is_number(color_check[2]))
 	{
 		free_matrix(color_check);
-		return (parse_error("Color has to be in format [R,G,B]"));
+		return (0);
 	}
 	color_final->r = ft_atoi(color_check[0]);
 	color_final->g = ft_atoi(color_check[1]);

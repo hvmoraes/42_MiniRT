@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:02:45 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/19 14:16:48 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/12/19 10:17:05 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,4 @@ void	init_data(char **argv)
 	if (!parse_file(argv))
 		exit(errno);
 	init_scene();
-	draw();
 }

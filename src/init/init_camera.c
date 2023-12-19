@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:53:04 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/09/12 13:54:53 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/12/19 10:26:30 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	set_viewport(void)
 
 	g_data.viewport.distance = 1;
 	aspect_ratio = (double)HEIGHT / (double)WIDTH;
-	g_data.viewport.width = 2 * g_data.viewport.distance 
+	g_data.viewport.width = 2 * g_data.viewport.distance
 		* tan(to_rad(g_data.camera.fov / 2));
 	g_data.viewport.height = g_data.viewport.width / aspect_ratio;
 }
@@ -65,12 +65,12 @@ int	init_camera(char **line)
 		return (parse_error("Camera's usage: C "
 				"[coords: x,y,z] [normal: x,y,z] fov"));
 	if (!check_coords(line[1], &g_data.camera.coor))
-		return (0);
+		return (parse_error("Camera's coordinates have to be a valid number"));
 	if (!check_normal(line[2], &g_data.camera.normal))
 		return (parse_error("Camera's normal coordinates have to be in format "
 				"[(x range: -1,1),(y range: -1,1),(z range: -1,1)]"));
 	g_data.camera.fov = ft_atod(line[3]);
-	if (g_data.camera.fov < 0 || g_data.camera.fov > 180)
+	if (g_data.camera.fov < 0 || g_data.camera.fov > 180 || !is_number(line[3]))
 		return (parse_error("Camera's FOV has to be in range [0,180]"));
 	set_viewport();
 	return (1);
