@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:06:56 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/19 12:50:39 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/12/19 10:18:04 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	add_object(t_object *object);
 
 /*    objects/sphere.c    */
 
+double	intersect_sphere(t_coor3 camera_origin, t_coor3 viewport_point,
+			t_sphere sphere);
 int		add_sphere(char **line);
 
 /*    end/error.c    */
@@ -67,6 +69,9 @@ void	handle_error(char *error);
 /*    end/free.c    */
 
 void	free_matrix(char **matrix);
+void	free_all(int flag);
+void	free_objects(void);
+void	end(void);
 
 /*    utils/coords.c    */
 
@@ -90,5 +95,9 @@ void	cross_prod(t_coor3 *u, t_coor3 *v, t_coor3 *w);
 double	dot(t_coor3 *u, t_coor3 *v);
 t_coor3	subtract(t_coor3 u, t_coor3 v);
 t_coor3	normalize(t_coor3 vector);
+
+/*    utils/extra.c    */
+
+int		is_number(char *str);
 
 #endif
