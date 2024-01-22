@@ -3,47 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 14:58:48 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/09/12 13:32:43 by hcorrea-         ###   ########.fr       */
+/*   Created: 2022/05/20 03:35:29 by smia              #+#    #+#             */
+/*   Updated: 2022/09/25 14:06:50 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minirt.h"
 
-t_data	g_data;
+t_collector *g_root = NULL;
 
-int	close_window(void)
+int	check_file(int ac, char **av)
 {
-	end();
-	exit(0);
-}
+	int	i;
+	int	fd;
 
-int	key_press(int keycode)
-{
-	printf("Key pressed: %i\n", keycode);
-	if (keycode == 65307)
+	fd = 0;
+	if (ac != 2)
+		return (1);
+	if (!av[1])
+		return (1);
+	i = ft_strlen(av[1]);
+	if (i < 4)
+		return (1);
+	if (av[1][i - 1] == 't' || av[1][i - 2] == 'r' || av[1][i - 3] == '.')
 	{
-		end();
-		exit(0);
-	}
-	return (1);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		init_data(argv);
-		mlx_hook(g_data.mlx.win, 2, 0, key_press, NULL);
-		mlx_hook(g_data.mlx.win, 17, 17, close_window, NULL);
-		mlx_loop(g_data.mlx.mlx);
+		fd = open(av[1], O_RDONLY);
+		if (fd < 0)
+			return (1);
+		close(fd);
 	}
 	else
-	{
-		printf("Usage: ./minirt {scene}.rt\n");
 		return (1);
-	}
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	t_scene	*sc;
+	int		fd;
+
+	if (check_file(ac, av))
+		ft_err("wrong args : Please try enter filename.rt");
+	fd = open(av[1], O_RDONLY);
+	sc = alloc_scence();
+	if (!sc)
+		ft_err("allocation");
+	parse(sc, fd);
+	ft_render(sc);
+	ft_collect(&g_root, g_root);
 	return (0);
 }

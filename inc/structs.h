@@ -3,83 +3,170 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 14:47:28 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/07/04 11:31:31 by hcorrea-         ###   ########.fr       */
+/*   Created: 2022/09/26 14:14:08 by aouhadou          #+#    #+#             */
+/*   Updated: 2022/09/26 14:15:27 by aouhadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_coor3
+/* img info struct */
+
+typedef struct s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img_data;
+
+typedef struct s_vars {
+	void	*mlx;
+	void	*win;
+}				t_vars;
+
+typedef struct s_vec
 {
 	double	x;
 	double	y;
 	double	z;
-}	t_coor3;
+}	t_vec;
 
-typedef struct s_coor2
+typedef struct s_inter
 {
-	int	x;
-	int	y;
-}	t_coor2;
+	double	t;
+	t_vec	col;
+	t_vec	hit;
+	t_vec	norm;
+}	t_inter;
 
-typedef struct s_color
+typedef struct t_cam
 {
-	int	r;
-	int	g;
-	int	b;
-}	t_color;
-
-typedef struct s_sphere
-{
-	t_coor3	coor;
-	double	radius;
-}	t_sphere;
-
-typedef struct s_object
-{
-	int							type;
-	void						*object;
-	t_color						color;
-	struct s_object				*next;
-}	t_object;
-
-typedef struct s_camera
-{
-	t_coor3	coor;
-	t_coor3	normal;
+	t_vec	cen;
+	t_vec	dir;
 	double	fov;
+	int		count;
+}	t_cam;
+
+typedef struct s_light
+{
+	t_vec			src;
+	double			ratio;
+	t_vec			col;
+	struct s_light	*next;
+}	t_light;
+
+typedef struct s_amb
+{
+	t_vec	col;
+	double	ratio;
+	int		count;
+}	t_amb;
+
+typedef struct s_objs
+{
+	int				type;
+	t_vec			cen;
+	t_vec			dir;
+	t_vec			p;
+	t_vec			col;
+	t_vec			norm;
+	struct s_objs	*next;
+}	t_objs;
+
+typedef struct s_scene
+{
+	t_vec	col;
+	t_cam	cam;
+	t_light	*light;
+	t_amb	amb;
+	t_objs	*objs;
+}	t_scene;
+
+typedef struct collector
+{
+	void				*adr;
+	struct collector	*next;
+}	t_collector;
+
+/* camera */
+typedef struct Camera_Setup
+{
+	t_vec		orig;
+	t_vec		up;
+	t_vec		right;
+	t_vec		forward;
+	double		height;
+	double		width;
+	double		aspect_r;
+	double		theta;
 }	t_camera;
 
-typedef struct s_viewport
+typedef struct CamRay
 {
-	double	width;
-	double	height;
-	double	distance;
-}	t_viewport;
+	t_vec	origin;
+	t_vec	dir;
+}	t_CamRay;
 
-typedef struct t_mlx
+/* rendring */
+typedef struct render
 {
-	void			*mlx;
-	void			*win;
-	int				width;
-	int				height;
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				line_len;
-	int				endian;
-}	t_mlx;
+	t_vars		vars;
+	t_img_data	img;
+	double		v;
+	double		u;
+	int			x;
+	int			y;
+	t_camera	cam;
+	t_CamRay	ray_;
+	t_vec		ray_col;
+}	t_render;
 
-typedef struct s_data
+// Intersection 
+
+typedef struct sphere
 {
-	t_mlx				mlx;
-	t_camera			camera;
-	t_viewport			viewport;
-	t_object			*objects;
-}	t_data;
+	double	a;
+	double	b;
+	double	c;
+	double	t;
+	double	t1;
+	double	t2;
+	t_vec	oc;
+}	t_sphere;
+
+typedef struct cylinder
+{
+	double	a;
+	double	b;
+	double	c;
+	double	t;
+	double	t1;
+	double	t2;
+	double	delta;
+	double	y0;
+	double	y1;
+	t_vec	oc;
+	t_vec	normal;
+}	t_cylinder;
+
+typedef struct cone
+{
+	double	a;
+	double	b;
+	double	c;
+	double	delta;
+	double	t;
+	double	t1;
+	double	t2;
+	double	y0;
+	double	y1;
+	t_vec	x;
+	t_vec	v;
+	double	k;
+}	t_cone_info;
 
 #endif
