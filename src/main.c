@@ -3,55 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aouhadou <aouhadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmirzaie <mmirzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 03:35:29 by smia              #+#    #+#             */
-/*   Updated: 2022/09/25 14:06:50 by aouhadou         ###   ########.fr       */
+/*   Created: 2023/10/27 14:19:52 by mmirzaie          #+#    #+#             */
+/*   Updated: 2023/12/05 16:46:13 by mmirzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "minirt.h"
 
-t_collector *g_root = NULL;
-
-int	check_file(int ac, char **av)
+static void	put_color_to_pixel(t_rt *rt, int x, int y, int color)
 {
-	int	i;
-	int	fd;
+	int	*buffer;
 
-	fd = 0;
-	if (ac != 2)
-		return (1);
-	if (!av[1])
-		return (1);
-	i = ft_strlen(av[1]);
-	if (i < 4)
-		return (1);
-	if (av[1][i - 1] == 't' || av[1][i - 2] == 'r' || av[1][i - 3] == '.')
+	buffer = rt->pointer_to_image;
+	buffer[(y * rt->size_line / 4) + x] = color;
+}
+
+static void	clear_screen(t_rt *rt)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (x < SIZE)
 	{
-		fd = open(av[1], O_RDONLY);
-		if (fd < 0)
-			return (1);
-		close(fd);
+		while (y < SIZE)
+		{
+			put_color_to_pixel(rt, x, y, 0x000000);
+			y++;
+		}
+		x++;
+		y = 0;
 	}
-	else
-		return (1);
-	return (0);
+}
+
+static void	put_colour(t_rt *rt, t_vec2d coord, t_vec3d colour)
+{
+	t_vec3d		accum_colour;
+
+	rt->accum[(int)(coord.x + coord.y * SIZE)]
+		= t_vec3d_add(rt->accum[(int)(coord.x + coord.y * SIZE)], colour);
+	accum_colour = rt->accum[(int)(coord.x + coord.y * SIZE)];
+	accum_colour = t_vec3d_div(accum_colour, rt->frameindex);
+	colour = clamp(accum_colour, rt->mincolour, rt->maxcolour);
+	put_color_to_pixel(rt, coord.x, coord.y, convert_to_rgba(colour));
+}
+
+void	render(t_rt *rt)
+{
+	t_vec2d		coord;
+	t_vec3d		colour;
+
+	clear_screen(rt);
+	camera()->mat = rotate_camera();
+	if (rt->frameindex == 1)
+		t_vec3dmemset(&rt->accum, 0);
+	coord.y = -1;
+	if (rt->hitable)
+	{
+		while (++(coord.y) < SIZE)
+		{
+			coord.x = -1;
+			while (++(coord.x) < SIZE)
+			{
+				colour = per_pixal(rt, coord.x, coord.y);
+				put_colour(rt, coord, colour);
+			}
+		}
+	}
+	rt->frameindex++;
+	mlx_put_image_to_window(rt->mlx, rt->window, rt->image, 0, 0);
 }
 
 int	main(int ac, char **av)
 {
-	t_scene	*sc;
-	int		fd;
+	t_rt	*rt;
 
-	if (check_file(ac, av))
-		ft_err("wrong args : Please try enter filename.rt");
-	fd = open(av[1], O_RDONLY);
-	sc = alloc_scence();
-	if (!sc)
-		ft_err("allocation");
-	parse(sc, fd);
-	ft_render(sc);
-	ft_collect(&g_root, g_root);
+	if (ac != 2)
+	{
+		printf("Wrong arguments.\n");
+		exit(1);
+	}
+	rt = malloc(sizeof(t_rt));
+	init_rt(rt);
+	init_mlx(rt);
+	parse(&rt->hitable, av[1]);
+	rt->frameindex = 1;
+	mlx_hook(rt->window, 2, 0, key_hook, rt);
+	mlx_loop_hook(rt->mlx, (void *)render, rt);
+	mlx_hook(rt->window, 17, 0L, exit_mlx, rt);
+	mlx_loop(rt->mlx);
 	return (0);
 }

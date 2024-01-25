@@ -3,119 +3,127 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smia <smia@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 13:01:02 by smia              #+#    #+#             */
-/*   Updated: 2022/09/29 00:30:04 by smia             ###   ########.fr       */
+/*   Created: 2023/12/05 14:00:07 by mmirzaie          #+#    #+#             */
+/*   Updated: 2023/12/06 10:52:09 by jaeshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#pragma once
-
-# define WIDTH 1200
-# define HEIGHT 1200
-# define EPS 0.000001
-# define CY 1
-# define PL 2
-# define SP 3
-# define CO 4 
+// std
+# include <fcntl.h>
+# include <../mlx/mlx.h>
 # include <math.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <stdio.h>
-# include <fcntl.h>
-# include "../mlx/mlx.h"
-# include "structs.h"
+# include <limits.h>
+# include <time.h>
+# include <unistd.h>
+# include <stdint.h>
 
-extern t_collector	*g_root;
+// ours
+# include "../Libft/inc/libft.h"
+# include "rt.h"
 
-// parse
-void		ft_err(char *err);
-int			check_file(int ac, char **av);
-void		parse(t_scene *sc, int fd);
-void		parse_line(char *id, char **tockens, t_scene *sc);
-void		parse_plane(t_scene *sc, char **tockens);
-void		parse_cylinder(t_scene *sc, char **tockens);
-void		parse_sphere(t_scene *sc, char **tockens);
-void		parse_light(t_scene *sc, char **tockens);
-void		parse_camera(t_scene *sc, char **tockens);
-void		parse_ambient(t_scene *sc, char **tockens);
-void		parse_cone(t_scene *sc, char **tockens);
-void		parse_triangle(t_scene *sc, char **tockens);
+// Srceen dimensions
+# define SIZE 700
 
-// allocation
-t_scene		*alloc_scence(void);
-t_objs		*alloc_obj(t_scene *sc);
-void		ft_collect(t_collector **g_root, t_collector *node);
-void		*ft_malloc(t_collector **g_root, size_t size);
+// KEYCODES
+# define ESC 53
+# define UP 126
+# define DOWN 125
+# define LEFT 123
+# define RIGHT 124
+# define W 13
+# define S 1
+# define D 2
+# define A 0
+# define C 8
+# define V 9
+# define J 38
+# define I 34
+# define D 2
+# define Z 6
+# define X 7
 
-// tools
-int			ft_strlen(const char *str);
-char		*gnl(int fd);
-double		ft_atod(const char *str);
-int			ft_atoi(const char *str);
-char		**ft_split(const char *str, char c);
-void		free_split(char **s);
+// Initailizes min rgb t_vec3d and max rgb t_vec3d
 
-//vectors
-void		null_vec(t_vec *v);
-t_vec		get_vec(char *s);
-t_vec		get_color(char *s);
-t_vec		get_normalized(t_vec v);
-void		normalize(t_vec *v);
-double		get_norm2(t_vec v);
-t_vec		sub_vec(t_vec u, t_vec v);
-t_vec		add_vec(t_vec u, t_vec v);
-t_vec		mult_vec(t_vec v, double a);
-t_vec		vect_cross(t_vec u, t_vec v);
-double		dot_product(t_vec u, t_vec v);
-double		module_v(t_vec	v);
-t_vec		div_vect(t_vec v, double a);
-t_vec		make_vec(double x, double y, double z);
+// MOUSECODES
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
-/*rendring */
-void		ft_render(t_scene *sc);
+t_vec3d			cross(t_vec3d v1, t_vec3d v2);
 
-/* camera */
-t_camera	set_camera(t_scene *sc);
-t_CamRay	ray_primary(t_camera *cam, double v, double u);
-t_vec		ray_at(t_CamRay *ray, double t);
-t_vec		ray_at(t_CamRay *ray, double t);
+int				parse(t_hitable **hitable, char	*fname);
+int				open_helper(char *fname);
+int32_t			get_type(char *line, uint32_t *type);
+t_hitable		*get_hitable_helper(t_hitable **hitable, uint32_t type);
 
-/* intersections*/
-double		take_min(double x, double y);
-t_inter		find_inter(t_CamRay *ray, t_scene *sc);
-double		inter_sphere(t_CamRay *ray, t_objs *sp);
-double		inter_plane(t_CamRay *ray, t_objs *pl);
-double		inter_cylinder(t_CamRay *ray, t_objs *cy);
+// src/utils.c
+void			t_vec3dmemset(t_vec3d accum[][SIZE*SIZE], int c);
+uint32_t		convert_to_rgba(const t_vec3d color);
+float			dot(t_vec3d v1, t_vec3d v2);
+void			normalize(t_vec3d *vec);
+float			length(t_vec3d vec);
+t_vec3d			color_multiply(t_vec3d color, float ratio);
+t_vec3d			clamp(t_vec3d value, t_vec3d min, t_vec3d max);
 
-/* bonus */
-double		pick_cone_inter(t_objs *co, t_CamRay *ray, t_cone_info inf);
-double		inter_cone(t_CamRay *ray, t_objs *co);
-t_inter		cone_normal(t_inter hold, t_objs *obj, t_CamRay *ray);
-t_vec		specular(t_scene *sc, t_inter inter, t_light *light);
+// src/utils/dmas.c
+t_vec3d			t_vec3d_add(t_vec3d v1, t_vec3d v2);
+t_vec3d			t_vec3d_sub(t_vec3d v1, t_vec3d v2);
+t_vec3d			t_vec3d_scale(t_vec3d v1, float scalar);
+t_vec3d			t_vec3d_div(t_vec3d v1, float deno);
 
-/* mlx funct */
-int			red_button(t_vars *vars);
-int			handle_key(int key, t_vars *vars);
-void		my_mlx_pixel_put(t_img_data *data, int x, int y, int color);
+// src/init.c
+void			init_rt(t_rt *rt);
+void			init_mlx(t_rt *rt);
+int				exit_mlx(t_rt *rt);
 
-// color
-t_vec		add_coef(t_vec col1, t_vec col2, double ratio);
-int			create_rgb(int r, int g, int b);
-t_vec		add_color(t_vec col1, t_vec col2);
-t_vec		ray_color(t_CamRay *ray, t_scene *sc);
-t_vec		colorize(double r, double g, double b);
-t_vec		diffuse(t_inter inter, t_light *light, double d);
-int			shade(t_scene *sc, t_inter inter, t_light *light);
+// src/keys.c
+int				key_hook(int keycode, t_rt *rt);
 
-//surface normal
-int			is_inside(t_vec ray, t_vec norm);
-t_inter		spher_normal(t_inter hold, t_objs *obj, t_CamRay *ray);
-t_inter		plane_normal(t_inter hold, t_objs *obj, t_CamRay *ray);
-t_inter		cylinder_normal(t_inter hold, t_objs *obj, t_CamRay *ray);
+// src/shapes.c
+float			ft_cone(t_hitable *map, t_ray coord);
+float			ft_cylinder(t_hitable *map, t_ray dir);
+float			plane(t_hitable *map, t_ray dir);
+float			ft_sphere(t_hitable *map, t_ray dir);
+
+// src/main.c
+void			render(t_rt *rt);
+// void			clearScreen(t_rt *rt);
+// void			put_color_to_pixel(t_rt *rt, int x, int y, int color);
+
+// init/camera.c
+t_camera		*camera(void);
+void			set_camera(t_nothitable map);
+t_mat4x4		create_matrix(t_vec3d axis, float angle);
+t_mat4x4		rotate_camera(void);
+t_vec3d			dir_from_mat(t_mat4x4 *mat, t_vec3d v);
+
+// init/light.c
+t_a_light		*a_light(void);
+void			set_a_light(t_nothitable map);
+t_light			*light(void);
+void			set_light(t_nothitable map);
+float			diffuse_light(t_vec3d norm, t_vec3d light);
+float			specular_light(t_vec3d norm, t_vec3d lvec, t_vec3d dir,
+					float ratio);
+float			set_light_ratio(t_rt *rt, t_hitpayload *payload);
+
+// src/utils/init_vec.c
+t_vec3d			init_vec3d(float x, float y, float z);
+t_vec2d			init_vec2d(float x, float y);
+
+// src/per_pixel.c
+t_vec3d			per_pixal(t_rt *rt, uint32_t x, uint32_t y);
+t_hitpayload	trace_ray(t_hitable *map, t_ray ray);
+
+t_vec3d			reflect(t_vec3d incident, t_vec3d normal);
+t_vec3d			getrendomvec3d(float roughness);
+void			set_raydir(t_vec3d *raydir);
+t_ray			set_ray(uint32_t x, uint32_t y);
 
 #endif
