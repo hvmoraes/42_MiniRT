@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmirzaie <mmirzaie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:50:23 by mmirzaie          #+#    #+#             */
-/*   Updated: 2023/12/05 14:43:18 by mmirzaie         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:21:07 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ t_vec3d	clamp(t_vec3d value, t_vec3d min, t_vec3d max)
 	t_vec3d	result;
 
 	result = value;
-	if (value.r < min.r)
-		result.r = min.r;
-	else if (value.r > max.r)
-		result.r = max.r;
-	if (value.g < min.g)
-		result.g = min.g;
-	else if (value.g > max.g)
-		result.g = max.g;
-	if (value.b < min.b)
-		result.b = min.b;
-	else if (value.b > max.b)
-		result.b = max.b;
+	if (value.x < min.x)
+		result.x = min.x;
+	else if (value.x > max.x)
+		result.x = max.x;
+	if (value.y < min.y)
+		result.y = min.y;
+	else if (value.y > max.y)
+		result.y = max.y;
+	if (value.z < min.z)
+		result.z = min.z;
+	else if (value.z > max.z)
+		result.z = max.z;
 	return (result);
 }
 
@@ -62,6 +62,6 @@ uint32_t	convert_to_rgba(const t_vec3d color)
 {
 	uint32_t	result;
 
-	result = ((int)color.r << 16) | ((int)color.g << 8) | (int)color.b;
+	result = ((int)color.x << 16) | ((int)color.y << 8) | (int)color.z;
 	return (result);
 }

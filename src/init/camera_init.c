@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:42:25 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/12/05 12:42:28 by jaeshin          ###   ########.fr       */
+/*   Updated: 2024/01/26 15:48:37 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_camera	*camera(void)
 	return (&camera);
 }
 
-void	set_camera(t_nothitable map)
+void	init_camera(t_nothitable map)
 {
 	camera()->pos.x = map.point.x;
 	camera()->pos.y = map.point.y;

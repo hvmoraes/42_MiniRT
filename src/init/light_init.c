@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:38:12 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/12/01 19:16:58 by jaeshin          ###   ########.fr       */
+/*   Updated: 2024/01/26 16:15:30 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ t_a_light	*a_light(void)
 	return (&a_light);
 }
 
-void	set_a_light(t_nothitable map)
+void	init_a_light(t_nothitable map)
 {
 	a_light()->intensity = map.light;
-	a_light()->color.r = map.rgb.r;
-	a_light()->color.g = map.rgb.g;
-	a_light()->color.b = map.rgb.b;
+	a_light()->color.x = map.rgb.x;
+	a_light()->color.y = map.rgb.y;
+	a_light()->color.z = map.rgb.z;
 }
 
 t_light	*light(void)
@@ -34,13 +34,13 @@ t_light	*light(void)
 	return (&light);
 }
 
-void	set_light(t_nothitable map)
+void	init_light(t_nothitable map)
 {
 	light()->pos.x = map.point.x;
 	light()->pos.y = map.point.y;
 	light()->pos.z = map.point.z;
 	light()->intensity = map.brightness;
-	light()->color.r = map.rgb.r;
-	light()->color.g = map.rgb.g;
-	light()->color.b = map.rgb.b;
+	light()->color.x = map.rgb.x;
+	light()->color.y = map.rgb.y;
+	light()->color.z = map.rgb.z;
 }

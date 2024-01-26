@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:40:01 by jaeshin           #+#    #+#             */
-/*   Updated: 2024/01/26 14:09:40 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:18:01 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ int	init_nothitable(uint32_t type, char *line)
 	if (obj.type == 'L')
 	{
 		sscanf(line, "%f,%f,%f %f %f,%f,%f", &obj.point.x, &obj.point.y,
-			&obj.point.z, &obj.brightness, &obj.rgb.r, &obj.rgb.g, &obj.rgb.b);
-		set_light(obj);
+			&obj.point.z, &obj.brightness, &obj.rgb.x, &obj.rgb.y, &obj.rgb.z);
+		init_light(obj);
 	}
 	if (obj.type == 'A')
 	{
-		sscanf(line, "%f %f,%f,%f", &obj.light, &obj.rgb.r, &obj.rgb.g, \
-			&obj.rgb.b);
-		set_a_light(obj);
+		sscanf(line, "%f %f,%f,%f", &obj.light, &obj.rgb.x, &obj.rgb.y, \
+			&obj.rgb.z);
+		init_a_light(obj);
 	}
 	if (obj.type == 'C')
 	{
 		sscanf(line, "%f,%f,%f %f,%f,%f %d", &obj.point.x, &obj.point.y,
 			&obj.point.z, &obj.normalized.x, &obj.normalized.y, \
 			&obj.normalized.z, &obj.fov);
-		set_camera(obj);
+		init_camera(obj);
 	}
 	return (0);
 }
@@ -43,23 +43,19 @@ void	get_hitable_helper2(t_hitable *new, char *line)
 {
 	if (new->type == SP)
 		sscanf(line, "%f,%f,%f %f %f,%f,%f %f", &new->point.x, &new->point.y,
-			&new->point.z, &new->radius2, &new->rgb.r, &new->rgb.g,
-			&new->rgb.b, &new->roughness);
+			&new->point.z, &new->radius2, &new->rgb.x, &new->rgb.y,
+			&new->rgb.z, &new->roughness);
 	else if (new->type == PL)
 		sscanf(line, "%f,%f,%f %f,%f,%f %f,%f,%f %f",
 			&new->point.x, &new->point.y, &new->point.z,
 			&new->normalized.x, &new->normalized.y, &new->normalized.z,
-			&new->rgb.r, &new->rgb.g, &new->rgb.b, &new->roughness);
+			&new->rgb.x, &new->rgb.y, &new->rgb.z, &new->roughness);
 	else if (new->type == CY)
 		sscanf(line, "%f,%f,%f %f,%f,%f %f %f %f,%f,%f %f",
 			&new->point.x, &new->point.y, &new->point.z,
 			&new->normalized.x, &new->normalized.y, &new->normalized.z,
-			&new->radius2, &new->height, &new->rgb.r, &new->rgb.g,
-			&new->rgb.b, &new->roughness);
-	else if (new->type == CN)
-		sscanf(line, "%f,%f,%f %f,%f,%f %f", &new->point.x, &new->point.y,
-			&new->point.z, &new->rgb.r, &new->rgb.g, &new->rgb.b,
-			&new->roughness);
+			&new->radius2, &new->height, &new->rgb.x, &new->rgb.y,
+			&new->rgb.z, &new->roughness);
 }
 
 int	get_hitable(t_hitable **hitable, char *line, uint32_t type)
@@ -86,7 +82,7 @@ int	parse(t_hitable **hitable, char	*fname)
 	uint32_t	type;
 	int			index;
 
-	fd = open_helper(fname);
+	fd = open_file(fname);
 	line = get_next_line(fd);
 	hitable_ref = NULL;
 	while (line != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:38:18 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/12/06 09:56:54 by jaeshin          ###   ########.fr       */
+/*   Updated: 2024/01/26 16:16:10 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ t_vec3d	color_multiply(t_vec3d color, float ratio)
 {
 	t_vec3d	result;
 
-	result = init_vec3d(color.r * ratio, color.g * ratio, color.b * ratio);
-	if (result.r > 255)
-		result.r = 255;
-	if (result.r < 0)
-		result.r = 0;
-	if (result.g > 255)
-		result.g = 255;
-	if (result.g < 0)
-		result.g = 0;
-	if (result.b > 255)
-		result.b = 255;
-	if (result.b < 0)
-		result.b = 0;
+	result = init_vec3d(color.x * ratio, color.y * ratio, color.z * ratio);
+	if (result.x > 255)
+		result.x = 255;
+	if (result.x < 0)
+		result.x = 0;
+	if (result.y > 255)
+		result.y = 255;
+	if (result.y < 0)
+		result.y = 0;
+	if (result.z > 255)
+		result.z = 255;
+	if (result.z < 0)
+		result.z = 0;
 	return (result);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:19:52 by mmirzaie          #+#    #+#             */
-/*   Updated: 2024/01/26 13:50:42 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:14:36 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("Wrong arguments.\n");
+		printf("Error\nUsage: ./minirt scene.rt\n");
 		exit(1);
 	}
 	rt = malloc(sizeof(t_rt));

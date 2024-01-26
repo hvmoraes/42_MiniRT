@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   per_pixal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:36:39 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/12/05 15:34:15 by jaeshin          ###   ########.fr       */
+/*   Updated: 2024/01/26 16:18:26 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ float	trace_ray_helper(t_hitable *ref_map, t_ray ray)
 		return (ft_cylinder(ref_map, ray));
 	else if (ref_map->type == PL)
 		return (plane(ref_map, ray));
-	else if (ref_map->type == CN)
-		return (ft_cone(ref_map, ray));
 	return (0.0f);
 }
 

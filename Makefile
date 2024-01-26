@@ -6,7 +6,7 @@
 #    By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 14:28:49 by hcorrea-          #+#    #+#              #
-#    Updated: 2024/01/26 11:55:58 by hcorrea-         ###   ########.fr        #
+#    Updated: 2024/01/26 14:23:52 by hcorrea-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC     =	$(shell find $(SRC_DIR) -name '*.c')
 OBJ     =	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC			=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -I./inc -g -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -I./inc
 LDFLAGS	=	-L./mlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 
 RM				=	rm -rf

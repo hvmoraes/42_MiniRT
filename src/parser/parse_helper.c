@@ -6,20 +6,20 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:36 by jaeshin           #+#    #+#             */
-/*   Updated: 2024/01/26 14:09:07 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:57:01 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	open_helper(char *fname)
+int	open_file(char *fname)
 {
 	int	fd;
 
 	fd = open(fname, O_RDONLY, 0644);
 	if (fd < 0)
 	{
-		printf("Wrong file name, go check again.\n");
+		printf("Error\nWrong file name\n");
 		exit(1);
 	}
 	return (fd);
