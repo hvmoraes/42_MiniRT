@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:31:36 by jaeshin           #+#    #+#             */
-/*   Updated: 2023/12/05 14:34:54 by jaeshin          ###   ########.fr       */
+/*   Updated: 2024/01/26 11:35:51 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int32_t	get_type(char *line, uint32_t *type)
 	if (!line[index])
 		return (-1);
 	*type = line[index];
+	index++;
 	if (!(line[index] == ' ' || line[index] == '\t'))
 		*type *= line[index];
 	if (!(line[index] == ' ' || line[index] == '\t'))
