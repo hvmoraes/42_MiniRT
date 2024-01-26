@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:40:49 by mmirzaie          #+#    #+#             */
-/*   Updated: 2024/01/26 10:56:49 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:16:25 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_rt(t_rt *rt)
 {
-	rt->hitable = malloc(sizeof(t_hitable));
+	rt->hitable = NULL;
 	rt->theta = 2.0f;
 	rt->mincolour = init_vec3d(0, 0, 0);
 	rt->maxcolour = init_vec3d(255, 255, 255);
@@ -37,7 +37,12 @@ int	exit_mlx(t_rt *rt)
 {
 	mlx_destroy_image(rt->mlx, rt->image);
 	mlx_destroy_window(rt->mlx, rt->window);
-	free(rt->hitable);
+	t_hitable *current = rt->hitable;
+	while (current != NULL) {
+		t_hitable *temp = current;
+		current = current->next;
+		free(temp);
+	}
 	free(rt->mlx);
 	free(rt);
 	exit(0);

@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:19:52 by mmirzaie          #+#    #+#             */
-/*   Updated: 2024/01/26 11:15:14 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2024/01/26 13:50:42 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int	main(int ac, char **av)
 	init_mlx(rt);
 	parse(&rt->hitable, av[1]);
 	rt->frameindex = 1;
-	mlx_hook(rt->window, 2, 0, key_hook, rt);
 	mlx_loop_hook(rt->mlx, (void *)render, rt);
+	mlx_key_hook(rt->window, key_hook, rt);
 	mlx_hook(rt->window, 17, 0L, exit_mlx, rt);
 	mlx_loop(rt->mlx);
 	return (0);

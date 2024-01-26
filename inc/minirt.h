@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeshin <jaeshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:00:07 by mmirzaie          #+#    #+#             */
-/*   Updated: 2023/12/06 10:52:09 by jaeshin          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:52:41 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define SIZE 700
 
 // KEYCODES
-# define ESC 53
+# define ESC 65307
 # define UP 126
 # define DOWN 125
 # define LEFT 123
