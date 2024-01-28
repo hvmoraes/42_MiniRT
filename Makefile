@@ -26,6 +26,7 @@ OBJ     =	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC			=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -I./inc
+
 LDFLAGS	=	-L./mlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 
 RM				=	rm -rf

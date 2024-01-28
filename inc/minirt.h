@@ -14,6 +14,24 @@
 # define MINIRT_H
 
 # include <stdio.h>
+# include <stdlib.h>
+# include "structs.h"
 # include "../mlx/mlx.h"
+
+# define WIDTH 600
+# define HEIGHT 400
+
+/*        src/render/draw.c        */
+void	put_pixel(t_data *data, int x, int y, int color);
+int		render(t_data *data);
+
+/*        src/init/init.c        */
+void	init(t_data *data);
+
+/*        src/end/close_window.c        */
+int		close_window(t_data *data);
+
+/*        src/utils/key_hooks.c        */
+int		key_hooks(int keycode, t_data *data);
 
 #endif
