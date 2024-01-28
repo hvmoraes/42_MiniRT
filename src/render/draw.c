@@ -25,16 +25,14 @@ int	render(t_data *data)
 	int	x;
 	int	y;
 
-	x = 0;
-	while (x < WIDTH)
+	x = -1;
+	while (++x < WIDTH)
 	{
-		y = 0;
-		while (y < HEIGHT)
+		y = -1;
+		while (++y < HEIGHT)
 		{
 			put_pixel(data, x, y, 16711680);
-			y++;
 		}
-		x++;
 	}
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->win, data->mlx->img, 0, 0);
 	return (0);

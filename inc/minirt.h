@@ -18,7 +18,7 @@
 # include "structs.h"
 # include "../mlx/mlx.h"
 
-# define WIDTH 600
+# define WIDTH 700
 # define HEIGHT 400
 
 /*        src/render/draw.c        */
