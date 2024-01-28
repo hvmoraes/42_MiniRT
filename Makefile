@@ -100,4 +100,7 @@ fclean:				clean
 
 re:				fclean all
 
+v:			all
+	        valgrind --leak-check=full --show-leak-kinds=all ./minirt
+
 .PHONY:		all clean fclean re
