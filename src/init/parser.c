@@ -38,8 +38,8 @@ void	verify_line(char *line, int *error)
 		return ;
 	else if (!ft_strncmp("C", verify[0], ft_strlen(verify[0])))
 		*error += init_camera(verify);
-	/*else if (!ft_strncmp("sp", verify[0], ft_strlen(verify[0])))
-		*error += add_sphere(verify);*/
+	else if (!ft_strncmp("sp", verify[0], ft_strlen(verify[0])))
+		*error += add_sphere(verify);
 	else if (verify[0][0] != '\n')
 		*error += parse_error("Invalid character found\n");
 	free_array(verify);

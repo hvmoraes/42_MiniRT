@@ -24,7 +24,7 @@ void	put_pixel(int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	trace_ray(t_vec3 camera, t_vec3 viewport, float min_t, float max_t)
+int	trace_ray(t_vec3 viewport, float min_t, float max_t)
 {
 	float	closest_t;
 	t_sphere	closest_sphere;
@@ -36,7 +36,7 @@ int	trace_ray(t_vec3 camera, t_vec3 viewport, float min_t, float max_t)
 	closest_sphere.radius = -1;
 	while (i < data()->total_spheres)
 	{
-		t = intersect_sphere(camera, viewport, data()->spheres[i]);
+		t = intersect_sphere(camera()->center, viewport, data()->spheres[i]);
 		if (t.x >= min_t && t.x <= max_t && t.x < closest_t)
 		{
 			closest_t = t.x;
@@ -59,12 +59,8 @@ int	render(void)
 	int	x;
 	int	y;
 	t_vec3	viewport_point;
-	t_vec3	camera;
 	int	color;
 
-	camera.x = 0;
-	camera.y = 0;
-	camera.z = 0;
 	y = HEIGHT / 2;
 	while (--y >= (HEIGHT / 2) * -1)
 	{
@@ -72,7 +68,7 @@ int	render(void)
 		while (++x <= WIDTH / 2)
 		{
 			viewport_point = canvas_viewport(x, y);
-			color = trace_ray(camera, viewport_point, 1, INF);
+			color = trace_ray(viewport_point, 1, INF);
 			//printf("x = %f y = %f z = %f\n", viewport_point.r, viewport_point.g, viewport_point.b);
 			put_pixel(x, y, color);
 		}

@@ -40,6 +40,8 @@ char	**check_coords(char *coords, int *error)
 			i++;
 	}
 	final_coords = ft_split(coords, ',');
+	if (array_size(final_coords) != 3)
+		*error += 1;
 	return(final_coords);
 }
 
@@ -48,6 +50,8 @@ int	check_normal(char *normal, int *error)
 	char	**final_normal;
 
 	final_normal = check_coords(normal, error);
+	if (array_size(final_normal) != 3)
+		*error += 1;
 	camera()->normal.x = ft_atod(final_normal[0]);
 	camera()->normal.y = ft_atod(final_normal[1]);
 	camera()->normal.z = ft_atod(final_normal[2]);
@@ -59,6 +63,41 @@ int	check_normal(char *normal, int *error)
 	if (camera()->normal.z < -1 || camera()->normal.z > 1)
 		return (1);
 	return (0);
+}
+
+t_vec3	check_color(char *color, int *error)
+{
+	int	i;
+	t_vec3	final_color;
+	char	**color_vec;
+
+	i = 0;
+	while (color[i])
+	{
+		if (!ft_isdigit(color[i]) && color[i] != ',' && color[i] != '\n' && !color[i])
+			*error += 1;
+		i++;
+	}
+	color_vec = ft_split(color, ',');
+	if (array_size(color_vec) != 3)
+		*error += 1;
+	final_color.x = ft_atoi(color_vec[0]);
+	final_color.y = ft_atoi(color_vec[1]);
+	final_color.z = ft_atoi(color_vec[2]);
+	free_array(color_vec);
+	if (final_color.x > 255)
+		final_color.x = 255;
+	if (final_color.x < 0)
+		final_color.x = 0;
+	if (final_color.y > 255)
+		final_color.y = 255;
+	if (final_color.y < 0)
+		final_color.y = 0;
+	if (final_color.z > 255)
+		final_color.z = 255;
+	if (final_color.z < 0)
+		final_color.z = 0;
+	return (final_color);
 }
 
 int	check_fov(char *fov)

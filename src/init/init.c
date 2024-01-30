@@ -34,6 +34,46 @@ int	init_camera(char **line)
 	return (error);
 }
 
+int	add_sphere(char **line)
+{
+	int	error;
+	char	**coords;
+	t_sphere	*tmp;
+	int	i;
+	t_vec3	color;
+
+	i = 0;
+	error = 0;
+	if (array_size(line) != 4)
+		return (parse_error("Invalid number of arguments for sphere\n"));
+	data()->total_spheres++;
+	tmp = malloc(data()->total_spheres * sizeof(t_sphere));
+	if (data()->spheres)
+	{
+		while (i < data()->total_spheres - 1)
+		{
+			tmp[i] = data()->spheres[i];
+			i++;
+		}
+	}
+	coords = check_coords(line[1], &error);
+	tmp[i].center.x = ft_atod(coords[0]);
+	tmp[i].center.y = ft_atod(coords[1]);
+	tmp[i].center.z = ft_atod(coords[2]);
+	free_array(coords);
+	tmp[i].radius = ft_atod(line[2]) / (float)2;
+	if (tmp[0].radius < 0)
+		return (parse_error("Sphere's diameter can't be negative"));
+	color = check_color(line[3], &error);
+	tmp[i].color.x = color.x;
+	tmp[i].color.y = color.y;
+	tmp[i].color.z = color.z;
+	tmp[i].int_color = rgb_to_int(tmp[i].color);
+	free(data()->spheres);
+	data()->spheres = tmp;
+	return (error);
+}
+
 void	init(void)
 {
 	data()->mlx = malloc(sizeof(t_mlx));
@@ -42,24 +82,6 @@ void	init(void)
 	data()->mlx->img = mlx_new_image(data()->mlx->mlx, WIDTH, HEIGHT);
 	data()->mlx->addr = mlx_get_data_addr(data()->mlx->img, &data()->mlx->bits_per_pixel,
 			&data()->mlx->line_length, &data()->mlx->endian);
-
-	data()->spheres = malloc(3 * sizeof(t_sphere));
-	data()->spheres[0].int_color = RED;
-	data()->spheres[0].radius = 1;
-	data()->spheres[0].center.x = 0;
-	data()->spheres[0].center.y = -1;
-	data()->spheres[0].center.z = 3;
-
-	data()->spheres[1].int_color = BLUE;
-	data()->spheres[1].radius = 1;
-	data()->spheres[1].center.x = 2;
-	data()->spheres[1].center.y = 0;
-	data()->spheres[1].center.z = 4;
-
-	data()->spheres[2].int_color = GREEN;
-	data()->spheres[2].radius = 1;
-	data()->spheres[2].center.x = -2;
-	data()->spheres[2].center.y = 0;
-	data()->spheres[2].center.z = 4;
-	data()->total_spheres = 3;
+	data()->total_spheres = 0;
+	data()->spheres = NULL;
 }

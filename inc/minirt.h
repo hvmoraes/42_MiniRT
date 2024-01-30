@@ -45,12 +45,14 @@ int		render(void);
 /*init.c*/
 void	init(void);
 int	init_camera(char **line);
+int	add_sphere(char **line);
 /*parser.c*/
 void	parser(int argc, char **argv);
 int	parse_error(char *error);
 /*checks.c*/
 char	**check_coords(char *coords, int *error);
 int	check_normal(char *normal, int *error);
+t_vec3	check_color(char *color, int *error);
 int	check_fov(char *fov);
 void	check_error(int error);
 /*parse_utils.c*/
@@ -85,6 +87,8 @@ t_vec3	vec3_sub(t_vec3 v1, t_vec3 v2);
 float	dot(t_vec3 v1, t_vec3 v2);
 /*math.c*/
 double	to_rad(int deg);
+/*color.c*/
+int	rgb_to_int(t_vec3 color);
 
 /*                                                             /
 /                        src/objects                           /
