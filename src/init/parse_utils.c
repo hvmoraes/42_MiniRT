@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 13:40:21 by hcorrea-          #+#    #+#             */
-/*   Updated: 2024/01/28 13:40:21 by hcorrea-         ###   ########.fr       */
+/*   Created: 2024/01/29 15:14:36 by hcorrea-          #+#    #+#             */
+/*   Updated: 2024/01/29 15:14:36 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minirt.h"
+#include "../inc/minirt.h"
 
-int	key_hooks(int keycode)
+void	set_viewport(void)
 {
-	//printf("%i\n", keycode);
-	if (keycode == 65307)
-	{
-		close_window();
-	}
-	return (0);
+	viewport()->distance = 1;
+	viewport()->width = (float)(2 * viewport()->distance) * tan(to_rad(camera()->fov / 2));
+	viewport()->height = viewport()->width * HEIGHT / WIDTH;
+}
+
+void	parser2(int *error)
+{
+	if (!data()->total_cameras)
+		*error += parse_error("No camera found in scene\n");
 }

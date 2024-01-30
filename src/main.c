@@ -12,14 +12,12 @@
 
 #include "../inc/minirt.h"
 
-int main()
+int main(int argc, char **argv)
 {
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	init(data);
-	mlx_loop_hook(data->mlx->mlx, render, data);
-	mlx_key_hook(data->mlx->win, key_hooks, data);
-	mlx_hook(data->mlx->win, 17, 17, close_window, data);
-	mlx_loop(data->mlx->mlx);
+	parser(argc, argv);
+	init();
+	mlx_loop_hook(data()->mlx->mlx, render, NULL);
+	mlx_key_hook(data()->mlx->win, key_hooks, NULL);
+	mlx_hook(data()->mlx->win, 17, 17, close_window, NULL);
+	mlx_loop(data()->mlx->mlx);
 }

@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*   array.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 13:40:21 by hcorrea-          #+#    #+#             */
-/*   Updated: 2024/01/28 13:40:21 by hcorrea-         ###   ########.fr       */
+/*   Created: 2024/01/29 15:29:23 by hcorrea-          #+#    #+#             */
+/*   Updated: 2024/01/29 15:29:23 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minirt.h"
-
-int	key_hooks(int keycode)
+int	array_size(char **array)
 {
-	//printf("%i\n", keycode);
-	if (keycode == 65307)
-	{
-		close_window();
-	}
-	return (0);
+	int	i;
+
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
 }

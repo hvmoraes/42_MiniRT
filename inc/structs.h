@@ -15,12 +15,18 @@
 
 # include "minirt.h"
 
-typedef	struct	s_color
+typedef	struct	s_vec3
 {
-	float	r;
-	float	g;
-	float	b;
-}	t_color;
+	float	x;
+	float	y;
+	float	z;
+}	t_vec3;
+
+typedef struct	s_vec2
+{
+	float	x;
+	float	y;
+}	t_vec2;
 
 typedef struct s_mlx
 {
@@ -36,17 +42,34 @@ typedef struct s_mlx
 typedef struct s_sphere
 {
 	float	radius;
-	t_color	color;
+	t_vec3	color;
+	int	int_color;
+	t_vec3	center;
 }	t_sphere;
+
+typedef struct s_camera
+{
+	t_vec3	center;
+	t_vec3	normal;
+	float	fov;
+}	t_camera;
 
 typedef	struct s_objs
 {
-	t_sphere	*spheres;
 }	t_objs;
+
+typedef	struct s_viewport
+{
+	float	width;
+	float	height;
+	float	distance;
+}	t_viewport;
 
 typedef struct s_data
 {
-	t_objs	*objs;
+	t_sphere	*spheres;
+	int	total_spheres;
+	int	total_cameras;
 	t_mlx 	*mlx;
 }	t_data;
 

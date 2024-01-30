@@ -15,23 +15,81 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
+# include <fcntl.h>
 # include "structs.h"
 # include "../mlx/mlx.h"
+# include "../Libft/inc/libft.h"
 
-# define WIDTH 700
-# define HEIGHT 400
+# define WIDTH 960
+# define HEIGHT 540
+# define INF 2147483647
+# define BLACK 0
+# define RED 16711680
+# define BLUE 255
+# define GREEN 65280
+# define YELLOW 16776960
 
-/*        src/render/draw.c        */
-void	put_pixel(t_data *data, int x, int y, int color);
-int		render(t_data *data);
+/*                                                             /
+/                        src/render                            /
+/                                                             */
 
-/*        src/init/init.c        */
-void	init(t_data *data);
+/*draw.c*/
+void	put_pixel(int x, int y, int color);
+int		render(void);
 
-/*        src/end/close_window.c        */
-int		close_window(t_data *data);
+/*                                                             /
+/                        src/init                              /
+/                                                             */
 
-/*        src/utils/key_hooks.c        */
-int		key_hooks(int keycode, t_data *data);
+/*init.c*/
+void	init(void);
+int	init_camera(char **line);
+/*parser.c*/
+void	parser(int argc, char **argv);
+int	parse_error(char *error);
+/*checks.c*/
+char	**check_coords(char *coords, int *error);
+int	check_fov(char *fov);
+void	check_error(int error);
+/*parse_utils.c*/
+void	set_viewport(void);
+void	parser2(int *error);
+
+/*                                                             /
+/                        src/end                               /
+/                                                             */
+
+/*close.c*/
+int		close_window(void);
+void	free_array(char **array);
+void	free_all(void);
+
+/*                                                             /
+/                        src/utils                             /
+/                                                             */
+
+/*key_hooks.c*/
+int		key_hooks(int keycode);
+/*canvas.c*/
+t_vec3	canvas_viewport(int x, int y);
+/*getters.c*/
+t_data	*data(void);
+t_viewport	*viewport(void);
+t_camera	*camera(void);
+/*array.c*/
+int	array_size(char **array);
+/*vectors.c*/
+t_vec3	vec3_sub(t_vec3 v1, t_vec3 v2);
+float	dot(t_vec3 v1, t_vec3 v2);
+/*math.c*/
+double	to_rad(int deg);
+
+/*                                                             /
+/                        src/objects                           /
+/                                                             */
+
+/*sphere.c*/
+t_vec2	intersect_sphere(t_vec3 camera, t_vec3 viewport, t_sphere sphere);
 
 #endif

@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*   getters.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 13:40:21 by hcorrea-          #+#    #+#             */
-/*   Updated: 2024/01/28 13:40:21 by hcorrea-         ###   ########.fr       */
+/*   Created: 2024/01/29 12:09:55 by hcorrea-          #+#    #+#             */
+/*   Updated: 2024/01/29 12:09:55 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minirt.h"
+#include "../inc/minirt.h"
 
-int	key_hooks(int keycode)
+t_data	*data(void)
 {
-	//printf("%i\n", keycode);
-	if (keycode == 65307)
-	{
-		close_window();
-	}
-	return (0);
+	static t_data	data;
+
+	return (&data);
+}
+
+t_viewport	*viewport(void)
+{
+	static t_viewport	viewport;
+
+	return (&viewport);
+}
+
+t_camera	*camera(void)
+{
+	static t_camera	camera;
+
+	return (&camera);
 }

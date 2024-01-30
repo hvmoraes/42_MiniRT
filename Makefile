@@ -25,13 +25,12 @@ SRC     =	$(shell find $(SRC_DIR) -name '*.c')
 OBJ     =	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC			=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -I./inc
-
+CFLAGS	=	-Wall -Wextra -Werror -I./inc -g -fsanitize=address
 LDFLAGS	=	-L./mlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 
-RM				=	rm -rf
-MKDIR			=	mkdir -p
-MAKE			=	make -C
+RM					=	rm -rf
+MKDIR				=	mkdir -p
+MAKE				=	make -C
 ERRIGNORE		=	2>/dev/null
 
 LIBFT_DIR			=	Libft
@@ -92,7 +91,7 @@ clean:
 					@clear
 					@echo "$(RED)All objects deleted!$(END)"
 
-fclean:				clean
+fclean:		clean
 					@$(RM) $(NAME)
 					@$(MAKE) $(LIBFT_DIR) fclean
 					@echo "$(RED)All executables deleted!$(END)"
@@ -101,7 +100,10 @@ fclean:				clean
 
 re:				fclean all
 
-v:			all
-	        valgrind --leak-check=full --show-leak-kinds=all ./minirt
+v:				all
+					$(eval ORIGINAL_CFLAGS := $(CFLAGS))
+					$(eval override CFLAGS := $(filter-out -g -fsanitize=address,$(CFLAGS)))
+					valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minirt
+					$(eval override CFLAGS := $(ORIGINAL_CFLAGS))
 
 .PHONY:		all clean fclean re

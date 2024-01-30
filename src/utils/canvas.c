@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 13:40:21 by hcorrea-          #+#    #+#             */
-/*   Updated: 2024/01/28 13:40:21 by hcorrea-         ###   ########.fr       */
+/*   Created: 2024/01/29 11:50:51 by hcorrea-          #+#    #+#             */
+/*   Updated: 2024/01/29 11:50:51 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minirt.h"
+#include "../inc/minirt.h"
 
-int	key_hooks(int keycode)
+t_vec3	canvas_viewport(int x, int y)
 {
-	//printf("%i\n", keycode);
-	if (keycode == 65307)
-	{
-		close_window();
-	}
-	return (0);
+	t_vec3	viewport_point;
+
+	viewport_point.x = x * ((float)viewport()->width / (float)WIDTH);
+	viewport_point.y = y * ((float)viewport()->height / (float)HEIGHT);
+	viewport_point.z = viewport()->distance;
+	return (viewport_point);
 }
