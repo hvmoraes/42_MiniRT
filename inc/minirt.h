@@ -43,7 +43,8 @@ int		render(void);
 /                                                             */
 
 /*init.c*/
-void	init(void);
+void	init_values(void);
+void	init_mlx(void);
 int	init_camera(char **line);
 int	add_sphere(char **line);
 /*parser.c*/

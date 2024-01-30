@@ -74,7 +74,13 @@ int	add_sphere(char **line)
 	return (error);
 }
 
-void	init(void)
+void	init_values(void)
+{
+	data()->total_spheres = 0;
+	data()->spheres = NULL;
+}
+
+void	init_mlx(void)
 {
 	data()->mlx = malloc(sizeof(t_mlx));
 	data()->mlx->mlx = mlx_init();
@@ -82,6 +88,4 @@ void	init(void)
 	data()->mlx->img = mlx_new_image(data()->mlx->mlx, WIDTH, HEIGHT);
 	data()->mlx->addr = mlx_get_data_addr(data()->mlx->img, &data()->mlx->bits_per_pixel,
 			&data()->mlx->line_length, &data()->mlx->endian);
-	data()->total_spheres = 0;
-	data()->spheres = NULL;
 }
