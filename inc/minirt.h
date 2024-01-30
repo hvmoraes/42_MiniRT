@@ -50,6 +50,7 @@ void	parser(int argc, char **argv);
 int	parse_error(char *error);
 /*checks.c*/
 char	**check_coords(char *coords, int *error);
+int	check_normal(char *normal, int *error);
 int	check_fov(char *fov);
 void	check_error(int error);
 /*parse_utils.c*/

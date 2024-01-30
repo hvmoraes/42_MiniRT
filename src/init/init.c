@@ -16,7 +16,6 @@ int	init_camera(char **line)
 {
 	int	error;
 	char	**coords;
-	char	**normal;
 
 	error = 0;
 	if (data()->total_cameras)
@@ -28,11 +27,7 @@ int	init_camera(char **line)
 	camera()->center.y = ft_atod(coords[1]);
 	camera()->center.z = ft_atod(coords[2]);
 	free_array(coords);
-	normal = check_coords(line[2], &error);
-	camera()->normal.x = ft_atod(normal[0]);
-	camera()->normal.y = ft_atod(normal[1]);
-	camera()->normal.z = ft_atod(normal[2]);
-	free_array(normal);
+	error += check_normal(line[2], &error);
 	error += check_fov(line[3]);
 	set_viewport();
 	data()->total_cameras++;
