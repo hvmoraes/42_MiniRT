@@ -12,7 +12,7 @@
 
 #include "../inc/minirt.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	init_values();
 	parser(argc, argv);

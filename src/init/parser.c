@@ -48,8 +48,8 @@ void	verify_line(char *line, int *error)
 
 void	parser(int argc, char **argv)
 {
-	int	fd;
-	char	*line;
+	int			fd;
+	char		*line;
 	static int	error;
 
 	if (argc != 2)

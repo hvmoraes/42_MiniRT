@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minirt.h"
+#include "../inc/minirt.h"
+
+//printf("%i\n", keycode);
 
 int	key_hooks(int keycode)
 {
-	//printf("%i\n", keycode);
 	if (keycode == 65307)
 	{
 		close_window();

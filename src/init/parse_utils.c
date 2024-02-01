@@ -12,10 +12,15 @@
 
 #include "../inc/minirt.h"
 
+// viewport()->width = (float)(2 * viewport()->distance) 
+// *tan(to_rad(camera()->fov / 2));
+// viewport()->width = (float)(2 * viewport()->distance)
+//  * tan(to_rad(camera()->fov / 2));
+
 void	set_viewport(void)
 {
 	viewport()->distance = 1;
-	viewport()->width = (float)(2 * viewport()->distance) * tan(to_rad(camera()->fov / 2));
+	viewport()->width = (float)(2 * viewport()->distance) *tan(to_rad(camera()->fov / 2));
 	viewport()->height = viewport()->width * HEIGHT / WIDTH;
 }
 

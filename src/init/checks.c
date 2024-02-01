@@ -14,7 +14,7 @@
 
 char	**check_coords(char *coords, int *error)
 {
-	int	i;
+	int		i;
 	char	**final_coords;
 
 	i = 0;
@@ -42,7 +42,7 @@ char	**check_coords(char *coords, int *error)
 	final_coords = ft_split(coords, ',');
 	if (array_size(final_coords) != 3)
 		*error += 1;
-	return(final_coords);
+	return (final_coords);
 }
 
 int	check_normal(char *normal, int *error)
@@ -67,7 +67,7 @@ int	check_normal(char *normal, int *error)
 
 t_vec3	check_color(char *color, int *error)
 {
-	int	i;
+	int		i;
 	t_vec3	final_color;
 	char	**color_vec;
 

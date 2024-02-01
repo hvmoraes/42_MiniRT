@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minirt.h"
+#include "../inc/minirt.h"
 
 void	free_mlx(void)
 {
@@ -39,7 +39,7 @@ void	free_array(char **array)
 	array = NULL;
 }
 
-int	close_window()
+int	close_window(void)
 {
 	free_mlx();
 	free_all();

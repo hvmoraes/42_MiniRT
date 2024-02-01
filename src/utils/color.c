@@ -14,5 +14,5 @@
 
 int	rgb_to_int(t_vec3 color)
 {
-	return ((int)color.x << 16) + ((int)color.y << 8) + (int)color.z;
+	return (((int)color.x << 16) + ((int)color.y << 8) + (int)color.z);
 }

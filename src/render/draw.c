@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minirt.h"
+#include "../inc/minirt.h"
 
 void	put_pixel(int x, int y, int color)
 {
 	char	*dst;
-	int	new_x;
-	int	new_y;
+	int		new_x;
+	int		new_y;
 
 	new_x = (WIDTH / 2) + x;
 	new_y = (HEIGHT / 2) - y;
@@ -26,10 +26,10 @@ void	put_pixel(int x, int y, int color)
 
 int	trace_ray(t_vec3 viewport, float min_t, float max_t)
 {
-	float	closest_t;
+	float		closest_t;
 	t_sphere	closest_sphere;
-	t_vec2	t;
-	int	i;
+	t_vec2		t;
+	int			i;
 
 	closest_t = INF;
 	i = 0;
@@ -50,8 +50,8 @@ int	trace_ray(t_vec3 viewport, float min_t, float max_t)
 		i++;
 	}
 	if (closest_sphere.radius == -1)
-		return BLACK;
-	return closest_sphere.int_color;
+		return (BLACK);
+	return (closest_sphere.int_color);
 }
 
 int	render(void)
