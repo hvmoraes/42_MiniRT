@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/minirt.h"
+#include "../inc/minirt.h"
 
 int	init_camera(char **line)
 {
-	int	error;
+	int		error;
 	char	**coords;
 
 	error = 0;
@@ -36,11 +36,11 @@ int	init_camera(char **line)
 
 int	add_sphere(char **line)
 {
-	int	error;
-	char	**coords;
+	int			error;
+	char		**coords;
 	t_sphere	*tmp;
-	int	i;
-	t_vec3	color;
+	int			i;
+	t_vec3		color;
 
 	i = 0;
 	error = 0;
@@ -86,6 +86,6 @@ void	init_mlx(void)
 	data()->mlx->mlx = mlx_init();
 	data()->mlx->win = mlx_new_window(data()->mlx->mlx, WIDTH, HEIGHT, "Minirt");
 	data()->mlx->img = mlx_new_image(data()->mlx->mlx, WIDTH, HEIGHT);
-	data()->mlx->addr = mlx_get_data_addr(data()->mlx->img, &data()->mlx->bits_per_pixel,
-			&data()->mlx->line_length, &data()->mlx->endian);
+	data()->mlx->addr = mlx_get_data_addr(data()->mlx->img,
+		&data()->mlx->bits_per_pixel, &data()->mlx->line_length, &data()->mlx->endian);
 }

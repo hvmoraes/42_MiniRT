@@ -59,6 +59,9 @@ void		check_error(int error);
 /*parse_utils.c*/
 void		set_viewport(void);
 void		parser2(int *error);
+/*checks_utils.c*/
+t_vec3	color_overflow(t_vec3 final_color);
+void	check_coords_utils(char *coords, int *error, int *i);
 
 /*                                                             /
 /                        src/end                               /

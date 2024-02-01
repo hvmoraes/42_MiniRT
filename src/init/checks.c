@@ -19,26 +19,7 @@ char	**check_coords(char *coords, int *error)
 
 	i = 0;
 	while (coords[i])
-	{
-		while (coords[i] && coords[i] != '.' && coords[i] != ',')
-		{
-			if (!ft_isdigit(coords[i]) && coords[i] != '-')
-				*error += 1;
-			i++;
-		}
-		if (coords[i] == '.')
-		{
-			i++;
-			while (coords[i] && coords[i] != ',')
-			{
-				if (!ft_isdigit(coords[i]))
-					*error += 1;
-				i++;
-			}
-		}
-		if (coords[i])
-			i++;
-	}
+		check_coords_utils(coords, error, &i);
 	final_coords = ft_split(coords, ',');
 	if (array_size(final_coords) != 3)
 		*error += 1;
@@ -74,7 +55,8 @@ t_vec3	check_color(char *color, int *error)
 	i = 0;
 	while (color[i])
 	{
-		if (!ft_isdigit(color[i]) && color[i] != ',' && color[i] != '\n' && !color[i])
+		if (!ft_isdigit(color[i]) && color[i] != ','
+			&& color[i] != '\n' && !color[i])
 			*error += 1;
 		i++;
 	}
@@ -85,18 +67,7 @@ t_vec3	check_color(char *color, int *error)
 	final_color.y = ft_atoi(color_vec[1]);
 	final_color.z = ft_atoi(color_vec[2]);
 	free_array(color_vec);
-	if (final_color.x > 255)
-		final_color.x = 255;
-	if (final_color.x < 0)
-		final_color.x = 0;
-	if (final_color.y > 255)
-		final_color.y = 255;
-	if (final_color.y < 0)
-		final_color.y = 0;
-	if (final_color.z > 255)
-		final_color.z = 255;
-	if (final_color.z < 0)
-		final_color.z = 0;
+	final_color = color_overflow(final_color);
 	return (final_color);
 }
 

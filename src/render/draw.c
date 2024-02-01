@@ -20,7 +20,8 @@ void	put_pixel(int x, int y, int color)
 
 	new_x = (WIDTH / 2) + x;
 	new_y = (HEIGHT / 2) - y;
-	dst = data()->mlx->addr + (new_y * data()->mlx->line_length + new_x * (data()->mlx->bits_per_pixel / 8));
+	dst = data()->mlx->addr + (new_y * data()->mlx->line_length + new_x
+			* (data()->mlx->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -32,9 +33,9 @@ int	trace_ray(t_vec3 viewport, float min_t, float max_t)
 	int			i;
 
 	closest_t = INF;
-	i = 0;
+	i = -1;
 	closest_sphere.radius = -1;
-	while (i < data()->total_spheres)
+	while (++i < data()->total_spheres)
 	{
 		t = intersect_sphere(camera()->center, viewport, data()->spheres[i]);
 		if (t.x >= min_t && t.x <= max_t && t.x < closest_t)
@@ -47,7 +48,6 @@ int	trace_ray(t_vec3 viewport, float min_t, float max_t)
 			closest_t = t.y;
 			closest_sphere = data()->spheres[i];
 		}
-		i++;
 	}
 	if (closest_sphere.radius == -1)
 		return (BLACK);
@@ -56,10 +56,10 @@ int	trace_ray(t_vec3 viewport, float min_t, float max_t)
 
 int	render(void)
 {
-	int	x;
-	int	y;
-	t_vec3	viewport_point;
-	int	color;
+	int			x;
+	int			y;
+	t_vec3		viewport_point;
+	int			color;
 
 	y = HEIGHT / 2;
 	while (--y >= (HEIGHT / 2) * -1)
@@ -69,10 +69,10 @@ int	render(void)
 		{
 			viewport_point = canvas_viewport(x, y);
 			color = trace_ray(viewport_point, 1, INF);
-			//printf("x = %f y = %f z = %f\n", viewport_point.r, viewport_point.g, viewport_point.b);
 			put_pixel(x, y, color);
 		}
 	}
-	mlx_put_image_to_window(data()->mlx->mlx, data()->mlx->win, data()->mlx->img, 0, 0);
+	mlx_put_image_to_window(data()->mlx->mlx, data()->mlx->win,
+		data()->mlx->img, 0, 0);
 	return (0);
 }

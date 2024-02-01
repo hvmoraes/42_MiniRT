@@ -15,14 +15,14 @@
 
 # include "minirt.h"
 
-typedef	struct s_vec3
+typedef struct s_vec3
 {
 	float		x;
 	float		y;
 	float		z;
 }	t_vec3;
 
-typedef struct	s_vec2
+typedef struct s_vec2
 {
 	float		x;
 	float		y;
@@ -54,11 +54,11 @@ typedef struct s_camera
 	float		fov;
 }	t_camera;
 
-typedef	struct s_objs
+typedef struct s_objs
 {
 }	t_objs;
 
-typedef	struct s_viewport
+typedef struct s_viewport
 {
 	float		width;
 	float		height;
