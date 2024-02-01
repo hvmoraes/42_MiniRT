@@ -47,6 +47,9 @@ void		init_values(void);
 void		init_mlx(void);
 int			init_camera(char **line);
 int			add_sphere(char **line);
+/*init2.c*/
+int			init_light(char **line);
+int			init_ambient(char **line);
 /*parser.c*/
 void		parser(int argc, char **argv);
 int			parse_error(char *error);
@@ -84,8 +87,11 @@ t_vec3		canvas_viewport(int x, int y);
 t_data		*data(void);
 t_viewport	*viewport(void);
 t_camera	*camera(void);
+t_light	*light(void);
+t_ambient	*ambient(void);
 /*array.c*/
 int			array_size(char **array);
+int	is_digit(char *nbr);
 /*vectors.c*/
 t_vec3		vec3_sub(t_vec3 v1, t_vec3 v2);
 float		dot(t_vec3 v1, t_vec3 v2);

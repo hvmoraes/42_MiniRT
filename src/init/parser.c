@@ -40,6 +40,10 @@ void	verify_line(char *line, int *error)
 		*error += init_camera(verify);
 	else if (!ft_strncmp("sp", verify[0], ft_strlen(verify[0])))
 		*error += add_sphere(verify);
+	else if (!ft_strncmp("L", verify[0], ft_strlen(verify[0])))
+		*error += init_light(verify);
+	else if (!ft_strncmp("A", verify[0], ft_strlen(verify[0])))
+		*error += init_ambient(verify);
 	else if (verify[0][0] != '\n')
 		*error += parse_error("Invalid character found\n");
 	free_array(verify);

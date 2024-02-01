@@ -73,6 +73,8 @@ t_vec3	check_color(char *color, int *error)
 
 int	check_fov(char *fov)
 {
+	if (!is_digit(fov))
+		return (1);
 	if (atoi(fov) > 0 && atoi(fov) < 181)
 	{
 		camera()->fov = atoi(fov);

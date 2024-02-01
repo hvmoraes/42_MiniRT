@@ -54,10 +54,6 @@ typedef struct s_camera
 	float		fov;
 }	t_camera;
 
-typedef struct s_objs
-{
-}	t_objs;
-
 typedef struct s_viewport
 {
 	float		width;
@@ -65,11 +61,29 @@ typedef struct s_viewport
 	float		distance;
 }	t_viewport;
 
+typedef struct s_light
+{
+	t_vec3	coords;
+	float	intensity;
+}	t_light;
+
+typedef struct s_ambient
+{
+	float	intensity;
+	t_vec3	color;
+}	t_ambient;
+
+typedef struct s_objs
+{
+}	t_objs;
+
 typedef struct s_data
 {
 	t_sphere	*spheres;
 	int			total_spheres;
 	int			total_cameras;
+	int			total_lights;
+	int			total_ambients;
 	t_mlx		*mlx;
 }	t_data;
 

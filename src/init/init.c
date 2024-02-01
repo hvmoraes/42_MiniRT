@@ -77,6 +77,9 @@ int	add_sphere(char **line)
 void	init_values(void)
 {
 	data()->total_spheres = 0;
+	data()->total_cameras = 0;
+	data()->total_lights = 0;
+	data()->total_ambients = 0;
 	data()->spheres = NULL;
 }
 

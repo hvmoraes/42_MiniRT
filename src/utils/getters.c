@@ -32,3 +32,17 @@ t_camera	*camera(void)
 
 	return (&camera);
 }
+
+t_light	*light(void)
+{
+	static t_light	light;
+
+	return (&light);
+}
+
+t_ambient	*ambient(void)
+{
+	static t_ambient	ambient;
+
+	return (&ambient);
+}
