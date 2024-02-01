@@ -63,8 +63,8 @@ void		check_error(int error);
 void		set_viewport(void);
 void		parser2(int *error);
 /*checks_utils.c*/
-t_vec3	color_overflow(t_vec3 final_color);
-void	check_coords_utils(char *coords, int *error, int *i);
+t_vec3		color_overflow(t_vec3 final_color);
+void		check_coords_utils(char *coords, int *error, int *i);
 
 /*                                                             /
 /                        src/end                               /
@@ -87,11 +87,11 @@ t_vec3		canvas_viewport(int x, int y);
 t_data		*data(void);
 t_viewport	*viewport(void);
 t_camera	*camera(void);
-t_light	*light(void);
+t_light		*light(void);
 t_ambient	*ambient(void);
 /*array.c*/
 int			array_size(char **array);
-int	is_digit(char *nbr);
+int			is_digit(char *nbr);
 /*vectors.c*/
 t_vec3		vec3_sub(t_vec3 v1, t_vec3 v2);
 float		dot(t_vec3 v1, t_vec3 v2);

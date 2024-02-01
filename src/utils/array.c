@@ -22,24 +22,21 @@ int	array_size(char **array)
 	return (i);
 }
 
-int	is_digit(char *nbr)
+char	*trim(char *check, char *nbr, size_t *i)
 {
-	size_t	i;
 	size_t	j;
-	char	*check;
 
-	i = 0;
 	j = 0;
-	check = malloc(sizeof(char) * ft_strlen(nbr) + 1);
-	while (i < ft_strlen(nbr))
+	while (*i < ft_strlen(nbr))
 	{
-		if ((nbr[i] >= '0' && nbr[i] <= '9') || (nbr[i] >= 'a' && nbr[i] < 'z')
-			|| (nbr[i] >= 'Z' && nbr[i] <= 'Z') || nbr[i] == '.')
+		if ((nbr[*i] >= '0' && nbr[*i] <= '9') || (nbr[*i] >= 'a'
+				&& nbr[*i] < 'z') || (nbr[*i] >= 'Z' && nbr[*i] <= 'Z')
+			|| nbr[*i] == '.')
 		{
-			check[i] = nbr[i];
+			check[*i] = nbr[*i];
 			j++;
 		}
-		i++;
+		(*i)++;
 	}
 	while (j < ft_strlen(nbr))
 	{
@@ -47,6 +44,17 @@ int	is_digit(char *nbr)
 		j++;
 	}
 	check[j] = '\0';
+	return (check);
+}
+
+int	is_digit(char *nbr)
+{
+	size_t	i;
+	char	*check;
+
+	i = 0;
+	check = malloc(sizeof(char) * ft_strlen(nbr) + 1);
+	check = trim(check, nbr, &i);
 	i = 0;
 	while (check[i])
 	{
