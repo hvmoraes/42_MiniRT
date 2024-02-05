@@ -31,6 +31,8 @@ int	trace_ray(t_vec3 viewport, float min_t, float max_t)
 	t_sphere	closest_sphere;
 	t_vec2		t;
 	int			i;
+	t_vec3	point;
+	t_vec3	normal;
 
 	closest_t = INF;
 	i = -1;
@@ -51,7 +53,10 @@ int	trace_ray(t_vec3 viewport, float min_t, float max_t)
 	}
 	if (closest_sphere.radius == -1)
 		return (BLACK);
-	return (closest_sphere.int_color);
+	point = vec3_add(camera()->center, scalar(viewport, closest_t));
+	normal = vec3_sub(point, closest_sphere.center);
+	normal = normalize(normal);
+	return (rgb_to_int(scalar(closest_sphere.color, calculate_light(point, normal))));
 }
 
 int	render(void)

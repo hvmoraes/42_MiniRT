@@ -94,7 +94,11 @@ int			array_size(char **array);
 int			is_digit(char *nbr);
 /*vectors.c*/
 t_vec3		vec3_sub(t_vec3 v1, t_vec3 v2);
+t_vec3		vec3_add(t_vec3 v1, t_vec3 v2);
+t_vec3		scalar(t_vec3 v, float scalar);
 float		dot(t_vec3 v1, t_vec3 v2);
+float		length(t_vec3 v);
+t_vec3		normalize(t_vec3 v);
 /*math.c*/
 double		to_rad(int deg);
 /*color.c*/
@@ -106,5 +110,7 @@ int			rgb_to_int(t_vec3 color);
 
 /*sphere.c*/
 t_vec2		intersect_sphere(t_vec3 camera, t_vec3 viewport, t_sphere sphere);
+/*light.c*/
+float			calculate_light(t_vec3 intersec, t_vec3 normal);
 
 #endif
