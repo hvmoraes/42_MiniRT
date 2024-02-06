@@ -21,7 +21,7 @@ float	calculate_light(t_vec3 point, t_vec3 normal)
 	i = 0;
 	i += ambient()->intensity;
 	//printf("point x = %f y = %f z = %f\n", point.x, point.y, point.z);
-	l = vec3_sub(light()->coords, point);
+	l = vec3_sub(point, light()->coords);
 	l = normalize(l);
 	//printf("l x = %f y = %f z = %f\n", l.x, l.y, l.z);
 	//printf("normal x = %f y = %f z = %f\n", normal.x, normal.y, normal.z);
