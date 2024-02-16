@@ -64,3 +64,4 @@ t_vec3	normalize(t_vec3 v)
 	result.z = v.z / length(v);
 	return (result);
 }
+

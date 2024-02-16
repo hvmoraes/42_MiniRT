@@ -110,7 +110,7 @@ int			rgb_to_int(t_vec3 color);
 
 /*sphere.c*/
 t_vec2		intersect_sphere(t_vec3 camera, t_vec3 viewport, t_sphere sphere);
-/*light.c*/
-float			calculate_light(t_vec3 intersec, t_vec3 normal);
+/*lights.c*/
+float	compute_lights(t_vec3 P, t_vec3 N);
 
 #endif

@@ -14,6 +14,5 @@
 
 int	rgb_to_int(t_vec3 color)
 {
-	color = color_overflow(color);
 	return (((int)color.x << 16) + ((int)color.y << 8) + (int)color.z);
 }
